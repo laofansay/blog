@@ -1,0 +1,53 @@
+{
+  "service": [
+    {
+      "name": "全栈多生态微服务架构技术",
+      "title": "微服务生态 | 全栈 | 统一认证 ",
+      "description": "jhipster是一个快速开发微服务及应用的平台,博主擅长使用它开发各种微服务、app和平台，博客熟悉并擅长使用jhipster相关的技术栈，Spring Boot、Spring Cloud、Angular、React、Vue、docker、docker-compose，同时博主还非常了解决mybatis-generator、jeecg，ruoyi、沃土平台相关的代码生成技术,曾修改扩充过mybatis-generator源码(https://github.com/hackpros/mybatis-generator-core/tree/master)",
+      "email": "jeneryfan@gmail.com",
+      "imgSrc": "/jhipster1.png"
+    },
+    {
+      "name": "现代电商网站建设",
+      "title": "电商平台 ｜分布式服务 ｜高可用 ｜高并发",
+      "description": "博主从2014开发从事互联网金融相关的研发工作，有着丰富的电子商务平台建精验，先后主导发过p2p网格借贷系统，跨境电商平台，我请客社交app，数字钱包，大有丰享电商平台",
+      "email": "jeneryfan@gmail.com",
+      "imgSrc": "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    {
+      "name": "办公OA系统",
+      "title": "全栈開發",
+      "description": "致力于开发全面的办公自动化（OA）系统，以提升企业内部工作效率和信息管理水平。我们的系统涵盖日程安排、任务分配、文档管理、通讯录、审批流程等多个模块，支持定制化需求，确保与客户业务流程的紧密结合。通过先进的技术架构和用户友好的界面设计，我们为企业提供一体化的解决方案，帮助其实现信息化管理的全面升级，从而提升生产力、降低成本、增强竞争力。",
+      "email": "jeneryfan@gmail.com",
+      "imgSrc": "https://images.pexels.com/photos/6120214/pexels-photo-6120214.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    },
+    {
+      "name": "App、小程序开发",
+      "title": "全栈開發",
+      "description": "专注于App和小程序开发，为客户提供创新的解决方案。我们的开发团队熟练掌握多种主流技术，包括但不限于React Native、Flutter、Ionic和原生开发（iOS和Android）。通过这些技术，我们能够构建跨平台的应用程序，确保用户在不同设备上都能享受到流畅的体验。我们注重用户界面的设计与用户体验的优化，同时兼顾性能优化和安全性要求。无论是初创企业还是大型组织，我们都致力于为客户量身定制高质量、高效率的移动应用解决方案，帮助其实现业务目标并与市场保持竞争优势網頁開發人員設計並建立網站，確保其在性能、安全性和可靠性方面優化。他們確保網頁用戶友好且美觀，同時與其他團隊成員合作，製作符合客戶目標的內容。開發人員還通過利用尖端技術來解決難題，確保網站快速加載。此外，他們會及時了解行業趨勢，以提供符合最新網站標準的高效解決方案給客戶。",
+      "email": "jeneryfan@gmail.com",
+      "imgSrc": "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    {
+      "name": "动态报表技术",
+      "title": "全栈開發",
+      "description": "动态报表技术允许用户根据实时数据动态生成、定制和呈现报表。我们利用先进的技术和工具，如React、Vue或Angular等前端框架，结合后端技术如Node.js、Django或Spring Boot，开发灵活且高度可定制的动态报表系统。这些系统能够实现多种功能，包括数据透视、图表生成、交互式过滤和排序，以及导出和分享报表。我们致力于通过优化用户界面和用户体验，确保报表在各种设备和平台上都能稳定运行，从而帮助企业提高数据可视化和决策效率。",
+      "email": "jeneryfan@gmail.com",
+      "imgSrc": "https://images.pexels.com/photos/7605981/pexels-photo-7605981.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    {
+      "name": "自动化测试及爬虫技术",
+      "title": "全栈開發",
+      "description": "App自动化测试和爬虫技术是关键的软件开发和数据采集工具。我们采用现代化的自动化测试框架，如Appium、XCTest和Robot Framework，以确保移动应用程序在不同平台（iOS和Android）上的稳定性和功能完整性。同时，我们利用Python、Scrapy和Beautiful Soup等爬虫技术，自动化收集和分析互联网上的数据。这些技术结合了高效的测试脚本编写和数据抓取算法，支持广泛的应用场景，包括软件质量保证和市场竞争分析。我们专注于提供可靠且高效的解决方案，帮助客户减少人力成本、加速开发周期，并提升数据驱动的决策能力。",
+      "email": "jeneryfan@gmail.com",
+      "imgSrc": "https://images.pexels.com/photos/26570912/pexels-photo-26570912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    },
+    {
+      "name": "零编码建站服务",
+      "title": "全栈開發",
+      "description": "零编码建站服务利用现代化的低代码或无代码平台，如WordPress、Wix或Squarespace，使用户能够快速创建和管理个性化的网站，无需深入的编程知识。这些平台提供丰富的模板和可定制的设计选项，支持直观的拖放功能和即时预览，让用户能够自由设计网站布局、添加内容和功能模块。此外，这些平台还提供集成的托管服务和安全性功能，确保网站的稳定性和安全性。零编码建站服务适用于个人、中小型企业以及创业者，为他们提供了快速启动在线业务的便捷途径。",
+      "email": "jeneryfan@gmail.com",
+      "imgSrc": "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    }
+  ]
+}

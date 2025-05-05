@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+<CLUSTER>
+<PARAM name="clusterName" value="openGauss" />
+<PARAM name="nodeNames" value="ogserver"/>
+<PARAM name="gaussdbAppPath" value="/opt/openGauss/app" />
+<PARAM name="gaussdbLogPath" value="/var/log/omm" />
+<PARAM name="tmpMppdbPath" value="/opt/openGauss/tmp"/>
+<PARAM name="gaussdbToolPath" value="/opt/openGauss/install/om" />
+<PARAM name="corePath" value="/opt/openGauss/corefile"/>
+<PARAM name="backIp1s" value="$SERVER_IP"/>
+</CLUSTER>
+<DEVICELIST>
+<DEVICE sn="ogserver">
+<PARAM name="name" value="ogserver"/>
+<PARAM name="azName" value="AZ1"/>
+<PARAM name="azPriority" value="1"/>
+<PARAM name="backIp1" value="$SERVER_IP"/>
+<PARAM name="sshIp1" value="$SERVER_IP"/>
+<!-- dn -->
+<PARAM name="dataNum" value="1"/>
+<PARAM name="dataPortBase" value="15400"/>
+<PARAM name="dataNode1" value="/data/openGauss"/>
+<PARAM name="dataNode1_syncNum" value="0"/>
+</DEVICE>
+</DEVICELIST>
+</ROOT>

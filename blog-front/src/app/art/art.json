@@ -1,0 +1,11 @@
+{
+    "arts":[
+        {"name":"洞天福地项目","img":"img/art1.jpg","url":"art1 description" ,"type":"e-commerce"},
+        {"name":"UI中国","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
+        {"name":"拖拉机80","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
+        {"name":"FarmmerTo-C","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
+        {"name":"FarmmerTo-F","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
+        {"name":"盘古溯源","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"}
+
+    ]
+}

@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  .navbar, .footer, .fixed, footer {
+    display: none !important;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide{
+  scrollbar-width: none;
+}
+
+
+/* 如果使用 Tailwind CSS 配置文件（tailwind.config.js），可以添加自定义插件 */
+@layer components {
+  .hover-image-container {
+    @apply relative flex flex-col items-center;
+  }
+  .hover-image {
+    @apply cursor-pointer;
+  }
+  .hover-image-large {
+    @apply absolute hidden group-hover:block top-0 left-0 z-10 rounded border border-gray-300 shadow-lg;
+  }
+}
+
+
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3; /* 显示多少行 */
+}
+
+.custom-3d-effect {
+  background-color: rgba(255, 255, 255, 0); /* 全透明背景 */
+  border: 2px solid #d1d5db; /* 边框颜色和宽度 */
+  padding: 2.5rem; /* 内边距 */
+  border-radius: 0.5rem; /* 边框圆角 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 投影效果 */
+  transform: perspective(1500px) rotateX(5deg) rotateY(-5deg); /* 3D 变换 */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* 过渡效果 */
+}
+
+.custom-3d-effect:hover {
+  transform: perspective(1500px) rotateX(0deg) rotateY(0deg) scale(1.1); /* 鼠标悬停时放大和重置旋转 */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* 鼠标悬停时增加阴影 */
+}

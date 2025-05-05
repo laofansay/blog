@@ -1,0 +1,291 @@
+{
+  "socialInfo": {
+    "name": "老范个人IP",
+    "title": "资深软件工程师.",
+    "content": "我是一名全栈开发人员。我主要使用Next.jsy和Java但偶尔也喜欢玩Docker、React、Ionic。在日常生活中,我会经营自己的初创公司和开源项目并制作自媒体视频",
+    "media": [
+      {
+        "name": "Github",
+        "link": "https://github.com/laofansay",
+        "followers": "",
+        "qrCode": ""
+      },
+      {
+        "name": "抖音",
+        "link": "https://www.douyin.com/user/MS4wLjABAAAAkAc08cmsgrCVi9QVxwLhD17FAR3Xubj0IidvX-JxT5J3H0R0j6xJdmnMAAlQBEtD?from_tab_name=main",
+        "followers": "",
+        "qrCode": ""
+      },
+      {
+        "name": "视频号",
+        "link": "",
+        "followers": "",
+        "qrCode": "/link/wx-shipinhao.png"
+      },
+      {
+        "name": "Youtube",
+        "link": "https://www.youtube.com/@laofansay",
+        "followers": "",
+        "qrCode": null
+      }
+    ]
+  },
+
+  "techStack": {
+    "development": [
+      {
+        "name": "Stripe",
+        "type": "Payment",
+        "icon": "FaStripe",
+        "iconUrl": "/stripe-logo.webp",
+        "fromColor": "from-blue-600",
+        "toColor": "to-purple-600",
+        "description": "支付解决方案"
+      },
+      {
+        "name": "VUE",
+        "type": "Framework",
+        "icon": "SiRemix",
+        "iconUrl": "/vuejs-original.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "Web应用框架"
+      },
+      {
+        "name": "Next.js",
+        "type": "Framework",
+        "icon": "SiNextdotjs",
+        "iconUrl": "/nextjs-original.svg",
+        "fromColor": "from-black",
+        "toColor": "to-black",
+        "description": "React框架"
+      },
+      {
+        "name": "Tailwind",
+        "type": "Styling",
+        "icon": "SiTailwindcss",
+        "iconUrl": "/tailwindcss-plain.svg",
+        "fromColor": "from-black",
+        "toColor": "to-black",
+        "description": "CSS框架"
+      },
+      {
+        "name": "WIX",
+        "type": "E-Commerce",
+        "icon": "SiShopify",
+        "iconUrl": "/wix-original.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "电商平台"
+      },
+      {
+        "name": "VS Code",
+        "type": "Code Editor",
+        "icon": "SiVisualstudiocode",
+        "iconUrl": "/vscode-original.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "代码编辑器"
+      },
+      {
+        "name": "Vercel",
+        "type": "Hosting Provider",
+        "icon": "SiVercel",
+        "iconUrl": "/vercel-logo.webp",
+        "fromColor": "from-black",
+        "toColor": "to-black",
+        "description": "托管服务"
+      },
+      {
+        "name": "Cline",
+        "type": "Hosting Provider",
+        "icon": "SiVercel",
+        "iconUrl": "/cline-logo.png",
+        "fromColor": "from-black",
+        "toColor": "to-black",
+        "description": "AI编码助手"
+      },
+      {
+        "name": "postgresql",
+        "type": "Database",
+        "icon": "SiSupabase",
+        "iconUrl": "/postgresql-original.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "数据库服务"
+      },
+      {
+        "name": "Java",
+        "type": "language",
+        "icon": "SiSupabase",
+        "iconUrl": "/java-original.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "解决方案"
+      },
+      {
+        "name": "Spring cloud",
+        "type": "framework",
+        "icon": "SiSupabase",
+        "iconUrl": "/spring-original.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "微服务框架"
+      },
+      {
+        "name": "Keycloak",
+        "type": "component",
+        "icon": "SiSupabase",
+        "iconUrl": "/keycloak_logo.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "用户框架"
+      },
+      {
+        "name": "Docker/k8s",
+        "type": "container",
+        "icon": "SiSupabase",
+        "iconUrl": "/docker-original.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "容器运维框架 "
+      }
+    ],
+    "productivity": [
+      {
+        "name": "Figma",
+        "type": "Design Tool",
+        "icon": "SiFigma",
+        "iconUrl": "/figma-original.svg",
+        "fromColor": "from-black",
+        "toColor": "to-black",
+        "description": "设计工具"
+      },
+      {
+        "name": "Chrome",
+        "type": "Browser",
+        "icon": "SiGooglechrome",
+        "iconUrl": "/chrome-original.svg",
+        "description": "浏览器"
+      },
+      {
+        "name": "Deepseek",
+        "type": "Analytics",
+        "icon": "deepseek",
+        "iconUrl": "/deepseek-logo.png",
+        "description": "数据分析"
+      },
+      {
+        "name": "Notion",
+        "type": "Notes",
+        "icon": "SiApple",
+        "iconUrl": "/notion-logo.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "笔记工具"
+      },
+      {
+        "name": "ChatGPT",
+        "type": "AI",
+        "icon": "SiOpenai",
+        "iconUrl": "/openai-logo.svg",
+        "fromColor": "from-teal-400",
+        "toColor": "to-teal-400",
+        "description": "AI助手"
+      },
+      {
+        "name": "Jhipster",
+        "type": "AI",
+        "icon": "SiOpenai",
+        "iconUrl": "/jhipster-icon.svg",
+        "fromColor": "from-white",
+        "toColor": "to-white",
+        "description": "后台效率工具"
+      }
+    ]
+  },
+  "profile": {
+    "name": "文刚",
+    "role": "软件工程师",
+    "image": "/fan.JPG",
+    "description": "我们是资深的软件工程师,拥有10年以上互联网行业经验。专注于全栈开发、微服务架构和系统设计,致力于为客户提供高质量的技术解决方案。",
+    "skills": [
+      "Java",
+      "Spring Cloud",
+      "React",
+      "Node.js",
+      "Docker",
+      "Kubernetes",
+      "AWS"
+    ],
+    "projects": [
+      {
+        "title": "微服务电商平台",
+        "description": "基于Spring Cloud的分布式电商系统，支持高并发访问和弹性扩展。"
+      },
+      {
+        "title": "企业级OA系统",
+        "description": "全栈开发的办公自动化系统，包含工作流、审批、文档管理等功能。"
+      },
+      {
+        "title": "移动应用开发",
+        "description": "使用React Native开发的跨平台移动应用，支持iOS和Android。"
+      }
+    ],
+    "contact": {
+      "email": "jeneryfan@hotmail.com",
+      "phone": "18591779527",
+      "location": "西安"
+    }
+  },
+  "teamMembers": [
+    {
+      "name": "祝小花",
+      "role": "全栈工程师",
+      "image": "/images/jhipster_family_member_0_head-512.png",
+      "description": "拥有10年以上互联网行业经验，曾任职于多家知名科技公司，专注于技术创新和团队建设。",
+      "linkedin": "#",
+      "github": "#",
+      "email": "contact@example.com",
+      "skills": ["Java", "Spring Cloud", "微服务架构", "DevOps", "敏捷开发"]
+    },
+    {
+      "name": "李一超",
+      "role": "全栈工程师",
+      "image": "/images/jhipster_family_member_1_head-512.png",
+      "description": "全栈开发专家，擅长系统架构设计和技术团队管理，热衷于新技术探索和创新。",
+      "linkedin": "#",
+      "github": "#",
+      "email": "tech@example.com",
+      "skills": ["React", "Node.js", "TypeScript", "Docker", "AWS"]
+    },
+    {
+      "name": "范小纤",
+      "role": "前端架构师/UI设计师",
+      "image": "/images/jhipster_family_member_3_head-512.png",
+      "description": "专注于分布式系统设计和微服务架构，拥有丰富的大规模系统构建经验。",
+      "linkedin": "#",
+      "github": "#",
+      "email": "arch@example.com",
+      "skills": ["系统架构", "Kubernetes", "Go", "分布式系统", "云原生"]
+    }
+  ],
+
+  "initiatives": [
+    {
+      "title": "技术咨询与指导",
+      "description": "为在校生和应届毕业生提供免费的技术指导和项目实践机会，帮助新人快速成长。",
+      "image": "/images/jhipster_family_member_2_head-512.png"
+    },
+    {
+      "title": "开源社区贡献",
+      "description": "积极参与开源项目开发，分享技术经验，推动技术社区发展。",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    },
+    {
+      "title": "创新孵化项目",
+      "description": "支持创新创业项目，提供技术支持和咨询服务，助力项目成长。",
+      "image": "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    }
+  ]
+}

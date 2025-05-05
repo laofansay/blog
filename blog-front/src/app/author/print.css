@@ -1,0 +1,36 @@
+@media print {
+  @page {
+    margin: 1cm;
+    size: A4;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  button {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .mx-16 {
+    margin: 0 !important;
+  }
+
+  .p-6 {
+    padding: 1.5rem !important;
+  }
+
+  .md\:w-3\/4 {
+    width: 100% !important;
+  }
+}
