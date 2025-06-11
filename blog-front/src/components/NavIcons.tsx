@@ -6,16 +6,17 @@ import { RootState, useAppDispatch } from "@/store/store";
 import { useSelector } from "react-redux";
 import { CgProfile } from "react-icons/cg";
 import { Tooltip } from "@nextui-org/react";
-import { hasAnyAuthority } from "@/api/config/private-route";
-import { AUTHORITIES } from "@/api/config/constants";
+import useInitializeAuth from "@/store/UseInitializeAuth";
+
 
 const NavIcons = () => {
+  const { isAuthenticated, isAdmin } = useInitializeAuth(); // ✅ 解构使用
+  const isLoggedIn =isAuthenticated
 
+  
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const menuRef = useRef < HTMLDivElement > (null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-
 
   //const account = useSelector((state: RootState) => state.authentication.account)
   useEffect(() => {
@@ -31,17 +32,23 @@ const NavIcons = () => {
   }, []);
 
   const handleProfile = () => {
-    router.push("/login");
+    if (!isLoggedIn) {
+      router.push("/login");
+    } else {
+      setIsProfileOpen((prev) => !prev);
+    }
   };
   const handleLogout = () => {
-    router.push("/logout");
+    if (isLoggedIn) {
+      router.push("/logout");
+    }
   };
 
   return (
     <div className="flex felx-center gap-4 xl:gap-6  relative " ref={menuRef}>
       <Tooltip
         color="default"
-        content={"menu"}
+        content={isProfileOpen && isLoggedIn ? "menu" : "login"}
       >
         <span
           className={`
@@ -51,7 +58,7 @@ const NavIcons = () => {
                         transition-all duration-300 ease-in-out
                         transform hover:scale-110 hover:-translate-y-1
                         active:scale-95 active:shadow-inner
-                        "text-primary" }
+                        ${isLoggedIn ? "text-primary" : "text-blue"}
   `}
         >
           <CgProfile onClick={handleProfile} size={30} />
@@ -62,22 +69,24 @@ const NavIcons = () => {
           <div className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center">
             <Link href="/author">个人简历</Link>
           </div>
-          <>
-            <div className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center">
-              <Link href="/admin/post">文章管理</Link>
-            </div>
-            <div className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center">
-              <Link href="/admin/category">分类管理</Link>
-            </div>
-            <div className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center">
-              <Link href="/admin/tag">标签管理</Link>
-            </div>
-          </>
+          {isAdmin && (
+            <>
+              <div className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center">
+                <Link href="/admin/post">文章管理</Link>
+              </div>
+              <div className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center">
+                <Link href="/admin/category">分类管理</Link>
+              </div>
+              <div className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center">
+                <Link href="/admin/tag">标签管理</Link>
+              </div>
+            </>
+          )}
           <div
             className="cursor-pointer hover:shadow-lg hover:bg-gray-300 mx-[-15px] justify-center text-center"
             onClick={handleLogout}
           >
-            "登录"
+            {isLoggedIn ? "退出" : "登录"}
           </div>
         </div>
       )}

@@ -5,10 +5,12 @@ export interface ICategory {
   name?: string;
   icon?: string | null;
   rank?: number | null;
-  deleted?: boolean | null;
-  createdTime?: dayjs.Dayjs | null;
+  status?: number | null;
+  orderNum?: number | null;
+  createdTime?: dayjs.Dayjs | null; 
+  updatedTime?: dayjs.Dayjs | null;
 }
 
 export const defaultValue: Readonly<ICategory> = {
-  deleted: false,
+  status: 0,
 };

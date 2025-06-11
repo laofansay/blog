@@ -1,4 +1,4 @@
-import axios from '@/api/config/axios-config';
+import axios from 'axios';
 import { createAsyncThunk, isFulfilled, isPending } from '@reduxjs/toolkit';
 import { loadMoreDataWhenScrolled, parseHeaderForLinks } from 'react-jhipster';
 import { cleanEntity } from '@/api/shared/util/entity-utils';

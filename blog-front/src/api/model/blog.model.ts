@@ -14,7 +14,7 @@ export interface IBlog {
   seoTitle?: string | null;
   seoDescription?: string | null;
   content?: string;
-  status?: number;
+  status?: BlogStatus;
   categoryId?: number;
   authorId?: number;
   viewCount?: number;
@@ -24,10 +24,9 @@ export interface IBlog {
   updateTime?: dayjs.Dayjs | null;
   category?: ICategory | null;
 }
-
 export const defaultValue: Readonly<IBlog> = {
   enableComment: false,
   title: "",
-  status: 0,
+  status: BlogStatus.DRAFT,
   viewCount: 0
 };

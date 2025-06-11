@@ -1,7 +1,7 @@
 "use client";
 import CardList from "@/components/CardList";
 import { IBlog, defaultValue } from "@/api/model/blog.model";
-import { getEntities, reset } from "@/api/shared/reducers/blog.reducers";
+import { getEntities, reset } from "@/api/shared/reducers/app/app.blog.reducers";
 import React, { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useSearchParams } from "next/navigation";

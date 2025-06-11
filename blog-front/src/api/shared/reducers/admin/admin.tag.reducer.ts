@@ -1,12 +1,11 @@
-import axios from '@/api/config/axios-config';
+import axios from 'axios';
 import { createAsyncThunk, isFulfilled, isPending } from '@reduxjs/toolkit';
 import { loadMoreDataWhenScrolled, parseHeaderForLinks } from 'react-jhipster';
 import { cleanEntity } from '@/api/shared/util/entity-utils';
 import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from '@/api/shared/reducers/reducer.utils';
-import { ICategory, defaultValue } from '@/api/model/category.model';
-import { ApiResponse, PageResponse } from '@/api/shared/types/api-response.types';
+import { ITag, defaultValue } from '@/api/model/tag.model';
 
-const initialState: EntityState<ICategory> = {
+const initialState: EntityState<ITag> = {
   loading: false,
   errorMessage: null,
   entities: [],
@@ -18,70 +17,67 @@ const initialState: EntityState<ICategory> = {
   gradeList: [],
 };
 
-const apiUrl = '/app/blog/category';
+const apiUrl = 'api/tags';
 
 // Actions
 
-export const getEntities = createAsyncThunk('category/fetch_entity_list',
-  async ({ query, page, size, sort }: IQueryParams) => {
-    const requestUrl = `${apiUrl}?${sort ? `page=${page}&size=${size}&${query}` : `${query}`}&cacheBuster=${new Date().getTime()}`;
-    return axios.get<ApiResponse<PageResponse<ICategory>>>(requestUrl);
-  }
-);
+export const getEntities = createAsyncThunk('tag/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
+  const requestUrl = `${apiUrl}?${sort ? `page=${page}&size=${size}&sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
+  return axios.get<ITag[]>(requestUrl);
+});
 
 export const getEntity = createAsyncThunk(
-  'category/fetch_entity',
+  'tag/fetch_entity',
   async (id: string | number) => {
     const requestUrl = `${apiUrl}/${id}`;
-    return axios.get<ApiResponse<ICategory>>(requestUrl);
+    return axios.get<ITag>(requestUrl);
   },
   { serializeError: serializeAxiosError },
 );
 
 export const createEntity = createAsyncThunk(
-  'category/create_entity',
-  async (entity: ICategory, thunkAPI) => {
-    return axios.post<ApiResponse<ICategory>>(apiUrl, cleanEntity(entity));
+  'tag/create_entity',
+  async (entity: ITag, thunkAPI) => {
+    return axios.post<ITag>(apiUrl, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
 
 export const updateEntity = createAsyncThunk(
-  'category/update_entity',
-  async (entity: ICategory, thunkAPI) => {
-    return axios.put<ApiResponse<ICategory>>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
+  'tag/update_entity',
+  async (entity: ITag, thunkAPI) => {
+    return axios.put<ITag>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
 
 export const partialUpdateEntity = createAsyncThunk(
-  'category/partial_update_entity',
-  async (entity: ICategory, thunkAPI) => {
-    return axios.patch<ApiResponse<ICategory>>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
+  'tag/partial_update_entity',
+  async (entity: ITag, thunkAPI) => {
+    return axios.patch<ITag>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
 
 export const deleteEntity = createAsyncThunk(
-  'category/delete_entity',
+  'tag/delete_entity',
   async (id: string | number, thunkAPI) => {
     const requestUrl = `${apiUrl}/${id}`;
-    return await axios.delete<ApiResponse<ICategory>>(requestUrl);
+    return await axios.delete<ITag>(requestUrl);
   },
   { serializeError: serializeAxiosError },
 );
 
 // slice
 
-export const CategorySlice = createEntitySlice({
-  name: 'category',
+export const TagSlice = createEntitySlice({
+  name: 'tag',
   initialState,
-  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(getEntity.fulfilled, (state, action) => {
         state.loading = false;
-        state.entity = action.payload.data.data;
+        state.entity = action.payload.data;
       })
       .addCase(deleteEntity.fulfilled, state => {
         state.updating = false;
@@ -89,25 +85,22 @@ export const CategorySlice = createEntitySlice({
         state.entity = {};
       })
       .addMatcher(isFulfilled(getEntities), (state, action) => {
-        const { data } = action.payload;
-        // 调整为适应后端返回格式
-        const result = data.data || { list: [], pagination: { total: 0 } };
-        const list = result.list || [];
-        const pagination = result.pagination || {};
-        const totalItems = pagination.total || 0;
+        const { data, headers } = action.payload;
+        const links = parseHeaderForLinks(headers.link);
 
         return {
           ...state,
           loading: false,
-          entities: list,
-          totalItems: totalItems,
+          links,
+          entities: loadMoreDataWhenScrolled(state.entities, data, links),
+          totalItems: parseInt(headers['x-total-count'], 10),
         };
       })
       .addMatcher(isFulfilled(createEntity, updateEntity, partialUpdateEntity), (state, action) => {
         state.updating = false;
         state.loading = false;
         state.updateSuccess = true;
-        state.entity = action.payload.data.data;
+        state.entity = action.payload.data;
       })
       .addMatcher(isPending(getEntities, getEntity), state => {
         state.errorMessage = null;
@@ -122,7 +115,7 @@ export const CategorySlice = createEntitySlice({
   },
 });
 
-export const { reset } = CategorySlice.actions;
+export const { reset } = TagSlice.actions;
 
 // Reducer
-export default CategorySlice.reducer;
+export default TagSlice.reducer;

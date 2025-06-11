@@ -8,7 +8,7 @@ import { FaWeixin } from "react-icons/fa";
 import { SiAlipay } from "react-icons/si";
 
 import React, { useEffect, useState } from "react";
-import { getGrade } from "@/api/shared/reducers/blog.reducers";
+import { getList } from "@/api/shared/reducers/app/app.tag.reducer";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ const ProfileCard = ({}) => {
   const [showQR, setShowQR] = useState("");
 
   useEffect(() => {
-    dispatch(getGrade());
+    dispatch(getList());
   }, [dispatch]);
 
   return (

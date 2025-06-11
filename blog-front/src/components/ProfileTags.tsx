@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getEntities, reset } from '@/api/shared/reducers/tag.reducer';
+import { getList, reset } from '@/api/shared/reducers/app/app.tag.reducer';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { ITEMS_PER_PAGE } from '@/api/shared/util/pagination.constants';
 import Link from 'next/link';
@@ -16,15 +16,7 @@ const ProfileTags = () => {
 
     useEffect(() => {
         // 发送API请求获取标签数据
-        dispatch(
-            getEntities({
-                page: page - 1,
-                size: rowsPerPage,
-                sort: "id,desc",
-                query: '' // 添加空查询参数
-            })
-        );
-
+        dispatch( getList());
         // 组件卸载时清理状态
         return () => {
             dispatch(reset());

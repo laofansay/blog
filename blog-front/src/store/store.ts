@@ -1,7 +1,8 @@
 import counterSlice from "@/store/slices/counter/counter";
-import blogReducer from '@/api/shared/reducers/blog.reducers';
-import categoryReducer from '@/api/shared/reducers/category.reducer';
-import tagReducer from '@/api/shared/reducers/tag.reducer';
+import appBlogReducer from '@/api/shared/reducers/app/app.blog.reducers';
+import appCategoryReducer from '@/api/shared/reducers/app/app.category.reducer';
+import appTagReducer from '@/api/shared/reducers/app/app.tag.reducer';
+import authentication from '@/api/shared/reducers/authentication';
 
 
 import { UnknownAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
@@ -10,10 +11,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const store = configureStore({
   reducer: {
-    blog: blogReducer,
-    category: categoryReducer,
-    tag: tagReducer,
+    blog: appBlogReducer,
+    category: appCategoryReducer,
+    tag: appTagReducer,
     counter: counterSlice,
+    authentication
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
