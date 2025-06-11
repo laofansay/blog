@@ -66,5 +66,5 @@ export class MainConfiguration {
   @Inject()
   logger: ILogger;
 
-  async onReady() { }
+  async onReady() {}
 }
