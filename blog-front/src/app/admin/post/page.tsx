@@ -44,7 +44,7 @@ import {
   getEntities,
   deleteEntity,
   reset,
-} from "@/api/shared/reducers/blog.reducers";
+} from "@/api/shared/reducers/admin/admin.blog.reducers";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { FaEllipsisVertical } from "react-icons/fa6";
 
@@ -72,11 +72,11 @@ const PostListPage = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(ITEMS_PER_PAGE);
 
-  const blogList = useAppSelector((state) => state.blog.entities);
-  const totalItems = useAppSelector((state) => state.blog.totalItems);
-  const isLoading = useAppSelector((state) => state.blog.loading);
-  const updateSuccess = useAppSelector((state) => state.blog.updateSuccess);
-  const errorMessage = useAppSelector((state) => state.blog.errorMessage);
+  const blogList = useAppSelector((state) => state.adminBlog.entities);
+  const totalItems = useAppSelector((state) => state.adminBlog.totalItems);
+  const isLoading = useAppSelector((state) => state.adminBlog.loading);
+  const updateSuccess = useAppSelector((state) => state.adminBlog.updateSuccess);
+  const errorMessage = useAppSelector((state) => state.adminBlog.errorMessage);
 
   const [blog, setBlog] = useState({});
 
@@ -87,9 +87,8 @@ const PostListPage = () => {
   useEffect(() => {
     dispatch(
       getEntities({
-        page: page - 1,
-        size: pageSize,
-        sort: "id",
+        page: page,
+        size: pageSize
       })
     );
     dispatch(reset());

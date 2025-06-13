@@ -5,6 +5,11 @@ import appTagReducer from '@/api/shared/reducers/app/app.tag.reducer';
 import authentication from '@/api/shared/reducers/authentication';
 
 
+import adminBlogReducer from '@/api/shared/reducers/admin/admin.blog.reducers';
+import adminCategoryReducer from '@/api/shared/reducers/admin/admin.category.reducer';
+import adminTagReducer from '@/api/shared/reducers/admin/admin.tag.reducer';
+
+
 import { UnknownAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
@@ -14,6 +19,10 @@ const store = configureStore({
     blog: appBlogReducer,
     category: appCategoryReducer,
     tag: appTagReducer,
+    adminBlog: adminBlogReducer,
+    AdminCategory: adminCategoryReducer,
+    adminTag: adminTagReducer,
+
     counter: counterSlice,
     authentication
   },

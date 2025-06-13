@@ -6,9 +6,7 @@ const useInitializeAuth = () => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   const account = useAppSelector(state => state.authentication.account);
-  console.log(account);
   const isAdmin = account?.username === 'admin';
-
   useEffect(() => {
     dispatch(getSession());
   }, [dispatch]);

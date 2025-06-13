@@ -4,6 +4,7 @@ import { loadMoreDataWhenScrolled, parseHeaderForLinks } from 'react-jhipster';
 import { cleanEntity } from '@/api/shared/util/entity-utils';
 import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from '@/api/shared/reducers/reducer.utils';
 import { ICategory, defaultValue } from '@/api/model/category.model';
+import { ApiResponse, PageResponse } from '../../types/api-response.types'
 
 const initialState: EntityState<ICategory> = {
   loading: false,
@@ -17,14 +18,29 @@ const initialState: EntityState<ICategory> = {
   gradeList: [],
 };
 
-const apiUrl = 'api/categories';
+const apiUrl = 'admin/blog/categor';
 
 // Actions
 
-export const getEntities = createAsyncThunk('category/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `page=${page}&size=${size}&sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<ICategory[]>(requestUrl);
+export const getEntities = createAsyncThunk('category/fetch_entity_list', 
+  async ({ query, page, size, sort }: IQueryParams) => {
+  const requestUrl = `${apiUrl}/page?cacheBuster=${new Date().getTime()}`
+  const requestBody = {
+    query,
+    page,
+    size
+  }
+  return axios.post<PageResponse<ICategory>>(requestUrl, requestBody)
 });
+
+export const getList = createAsyncThunk('category/fetch_entity_list', 
+  async ({}: IQueryParams) => {
+  const requestUrl = `${apiUrl}/list?cacheBuster=${new Date().getTime()}`;
+  const requestBody = {
+  }
+  return axios.post<ApiResponse<ICategory[]>>(requestUrl,requestBody);
+});
+
 
 export const getEntity = createAsyncThunk(
   'category/fetch_entity',
@@ -46,7 +62,7 @@ export const createEntity = createAsyncThunk(
 export const updateEntity = createAsyncThunk(
   'category/update_entity',
   async (entity: ICategory, thunkAPI) => {
-    return axios.put<ICategory>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
+    return axios.put<ICategory>(`${apiUrl}/update`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
@@ -54,7 +70,7 @@ export const updateEntity = createAsyncThunk(
 export const partialUpdateEntity = createAsyncThunk(
   'category/partial_update_entity',
   async (entity: ICategory, thunkAPI) => {
-    return axios.patch<ICategory>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
+    return axios.patch<ICategory>(`${apiUrl}/update`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
@@ -93,16 +109,29 @@ export const CategorySlice = createEntitySlice({
           loading: false,
           links,
           entities: loadMoreDataWhenScrolled(state.entities, data, links),
-          totalItems: parseInt(headers['x-total-count'], 10),
+          totalItems: data.data.pagination.total,
         };
+      })
+      .addMatcher(isFulfilled(getEntity), (state, action) => {
+        state.updating = false;
+        state.loading = false;
+        state.updateSuccess = true;
+        state.entity = action.payload.data.data;
+      })
+      .addMatcher(isFulfilled(getList), (state, action) => {
+        state.updating = false;
+        state.loading = false;
+        state.updateSuccess = true;
+        state.entities = action.payload.data.data;
       })
       .addMatcher(isFulfilled(createEntity, updateEntity, partialUpdateEntity), (state, action) => {
         state.updating = false;
         state.loading = false;
         state.updateSuccess = true;
-        state.entity = action.payload.data;
+        state.entity = action.payload.data.data;
       })
-      .addMatcher(isPending(getEntities, getEntity), state => {
+     
+      .addMatcher(isPending(getEntities, getEntity,getList), state => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;

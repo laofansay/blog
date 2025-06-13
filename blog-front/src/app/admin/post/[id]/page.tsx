@@ -31,22 +31,22 @@ import {
   createEntity,
   updateEntity,
   reset,
-} from "@/api/shared/reducers/blog.reducers";
-import { getEntities as getCategories } from "@/api/shared/reducers/category.reducer";
-import { getEntities as getTags } from "@/api/shared/reducers/tag.reducer";
+} from "@/api/shared/reducers/admin/admin.blog.reducers";
+import { getEntities as getCategories } from "@/api/shared/reducers/admin/admin.category.reducer";
+import { getEntities as getTags } from "@/api/shared/reducers/admin/admin.tag.reducer";
 
 const UpdatePost = ({ params }) => {
   const { id } = params;
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const blog = useAppSelector((state) => state.blog.entity);
-  const loading = useAppSelector((state) => state.blog.loading);
-  const errorMessage = useAppSelector((state) => state.blog.errorMessage);
-  const updateSuccess = useAppSelector((state) => state.blog.updateSuccess);
+  const blog = useAppSelector((state) => state.adminBlog.entity);
+  const loading = useAppSelector((state) => state.adminBlog.loading);
+  const errorMessage = useAppSelector((state) => state.adminBlog.errorMessage);
+  const updateSuccess = useAppSelector((state) => state.adminBlog.updateSuccess);
 
-  const categorList = useAppSelector((state) => state.category.entities);
-  const tagsList = useAppSelector((state) => state.tag.entities);
+  const categorList = useAppSelector((state) => state.adminCategory.entities);
+  const tagsList = useAppSelector((state) => state.adminTag.entities);
 
   const [title, setTitle] = useState(blog.title);
   const [shortDescription, setShortDescription] = useState(

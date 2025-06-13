@@ -7,9 +7,11 @@ import {
 	IQueryParams,
 	createEntitySlice,
 	EntityState,
-	serializeAxiosError
+	serializeAxiosError,
 } from '@/api/shared/reducers/reducer.utils'
-import { IBlog, defaultValue } from '@//api/model/blog.model'
+
+import { IBlog, defaultValue } from '@/api/model/blog.model'
+import { ApiResponse, PageResponse } from '../../types/api-response.types'
 
 const initialState: EntityState<IBlog> = {
 	loading: false,
@@ -20,81 +22,94 @@ const initialState: EntityState<IBlog> = {
 	updating: false,
 	totalItems: 0,
 	updateSuccess: false,
-	gradeList: []
+	gradeList: [],
 }
 
-const apiUrl = 'api/blogs'
+const apiUrl = '/admin/blog/post';
 
 // Actions
+
+// 分页列表查询
 export const getEntities = createAsyncThunk(
-	'blog/fetch_entity_list',
+	'post/fetch_entity_list',
 	async ({ query, page, size, sort }: IQueryParams) => {
-		const requestUrl = `${apiUrl}?${
-			sort ? `page=${page}&size=${size}&sort=${sort}&${query}` : `${query}`
-		}&cacheBuster=${new Date().getTime()}`
-		return axios.get<IBlog[]>(requestUrl)
+		const requestUrl = `${apiUrl}/page?cacheBuster=${new Date().getTime()}`
+		const requestBody = {
+			query,
+			page,
+			size
+		}
+		return axios.post<PageResponse<IBlog>>(requestUrl, requestBody)
 	}
 )
 
-export const getGrade = createAsyncThunk(
-	'blog/fetch_entity_grade',
-	async () => {
-		const requestUrl = `${apiUrl}?tags=精选&page=0&size=10&sort=id,desc&cacheBuster=${new Date().getTime()}`
-		return axios.get<IBlog[]>(requestUrl)
-	}
-)
+// 获取单个实体
 export const getEntity = createAsyncThunk(
-	'blog/fetch_entity',
+	'post/fetch_entity',
+	async (id: string | number) => {
+		const requestUrl = `${apiUrl}/info?id=${id}`
+		return axios.get<ApiResponse<IBlog>>(requestUrl)
+	},
+	{ serializeError: serializeAxiosError }
+)
+
+// 创建实体
+export const createEntity = createAsyncThunk(
+	'post/create_entity',
+	async (entity: IBlog) => {
+		return axios.post<IBlog>(`${apiUrl}/add`, cleanEntity(entity))
+	},
+	{ serializeError: serializeAxiosError }
+)
+
+// 更新实体
+export const updateEntity = createAsyncThunk(
+	'post/update_entity',
+	async (entity: IBlog) => {
+		return axios.put<IBlog>(`${apiUrl}/update`, cleanEntity(entity))
+	},
+	{ serializeError: serializeAxiosError }
+)
+
+// 局部更新实体
+export const partialUpdateEntity = createAsyncThunk(
+	'post/partial_update_entity',
+	async (entity: IBlog) => {
+		return axios.patch<IBlog>(`${apiUrl}/update`, cleanEntity(entity))
+	},
+	{ serializeError: serializeAxiosError }
+)
+
+// 删除实体
+export const deleteEntity = createAsyncThunk(
+	'post/delete_entity',
 	async (id: string | number) => {
 		const requestUrl = `${apiUrl}/${id}`
-		return axios.get<IBlog>(requestUrl)
+		return axios.delete<IBlog>(requestUrl)
 	},
 	{ serializeError: serializeAxiosError }
 )
 
-export const createEntity = createAsyncThunk(
-	'blog/create_entity',
-	async (entity: IBlog, thunkAPI) => {
-		return axios.post<IBlog>(apiUrl, cleanEntity(entity))
+// 发布文章
+export const publishEntity = createAsyncThunk(
+	'post/publish_entity',
+	async (id: string | number) => {
+		const requestUrl = `${apiUrl}/publish/${id}`
+		return axios.get<ApiResponse<IBlog>>(requestUrl)
 	},
 	{ serializeError: serializeAxiosError }
 )
 
-export const updateEntity = createAsyncThunk(
-	'blog/update_entity',
-	async (entity: IBlog, thunkAPI) => {
-		return axios.put<IBlog>(`${apiUrl}/${entity.id}`, cleanEntity(entity))
-	},
-	{ serializeError: serializeAxiosError }
-)
-
-export const partialUpdateEntity = createAsyncThunk(
-	'blog/partial_update_entity',
-	async (entity: IBlog, thunkAPI) => {
-		return axios.patch<IBlog>(`${apiUrl}/${entity.id}`, cleanEntity(entity))
-	},
-	{ serializeError: serializeAxiosError }
-)
-
-export const deleteEntity = createAsyncThunk(
-	'blog/delete_entity',
-	async (id: string | number, thunkAPI) => {
-		const requestUrl = `${apiUrl}/${id}`
-		return await axios.delete<IBlog>(requestUrl)
-	},
-	{ serializeError: serializeAxiosError }
-)
-
-// slice
+// Slice
 export const blogSlice = createEntitySlice({
-	name: 'blog',
+	name: 'post',
 	initialState,
 	reducers: {},
 	extraReducers(builder) {
 		builder
 			.addCase(getEntity.fulfilled, (state, action) => {
 				state.loading = false
-				state.entity = action.payload.data
+				state.entity = action.payload.data.data
 			})
 			.addCase(deleteEntity.fulfilled, (state) => {
 				state.updating = false
@@ -103,57 +118,50 @@ export const blogSlice = createEntitySlice({
 			})
 			.addMatcher(isFulfilled(getEntities), (state, action) => {
 				const { data, headers } = action.payload
-				const links = parseHeaderForLinks(headers.link)
+				const links = '';
 
 				return {
 					...state,
 					loading: false,
 					links,
-					entities: loadMoreDataWhenScrolled(state.entities, data, links),
-					totalItems: parseInt(headers['x-total-count'], 10)
+					entities: loadMoreDataWhenScrolled(state.entities, data.data.list, links),
+          totalItems: data.data.pagination.total,
 				}
 			})
-			.addMatcher(isFulfilled(getGrade), (state, action) => {
-				const { data, headers } = action.payload
-				const links = parseHeaderForLinks(headers.link)
-				return {
-					...state,
-					loading: false,
-					gradeList: loadMoreDataWhenScrolled(state.entities, data, links),
-					totalItems: parseInt(headers['x-total-count'], 10)
-				}
-			})
+      .addMatcher(isPending(getEntities, getEntity), state => {
+        state.errorMessage = null;
+        state.updateSuccess = false;
+        state.loading = true;
+      })
 			.addMatcher(
-				isFulfilled(createEntity, updateEntity, partialUpdateEntity),
+				isFulfilled(createEntity, updateEntity, partialUpdateEntity,publishEntity),
 				(state, action) => {
 					state.updating = false
 					state.loading = false
 					state.updateSuccess = true
-					state.entity = action.payload.data
+					state.entity = action.payload.data.data
 				}
 			)
-			.addMatcher(isPending(getEntities, getEntity), (state) => {
-				state.errorMessage = null
-				state.updateSuccess = false
-				state.loading = true
-			})
 			.addMatcher(
 				isPending(
+					getEntities,
+					getEntity,
 					createEntity,
 					updateEntity,
 					partialUpdateEntity,
-					deleteEntity
+					deleteEntity,
+					publishEntity
 				),
 				(state) => {
 					state.errorMessage = null
 					state.updateSuccess = false
+					state.loading = true
 					state.updating = true
 				}
 			)
-	}
+	},
 })
 
 export const { reset } = blogSlice.actions
 
-// Reducer
 export default blogSlice.reducer

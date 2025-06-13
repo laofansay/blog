@@ -26,18 +26,18 @@ import { FaAngleDown } from "react-icons/fa6";
 import { GrFormView } from "react-icons/gr";
 import { GrView } from "react-icons/gr";
 
-import { createEntity } from "@/api/shared/reducers/blog.reducers";
-import { getEntities as getCategories } from "@/api/shared/reducers/category.reducer";
-import { getEntities as getTags } from "@/api/shared/reducers/tag.reducer";
+import { createEntity } from "@/api/shared/reducers/admin/admin.blog.reducers";
+import { getList as getCateList } from "@/api/shared/reducers/admin/admin.category.reducer";
+import { getList as getCateList } from "@/api/shared/reducers/admin/admin.tag.reducer";
 
 const AddPost = () => {
   const { id } = useParams<{ id: string }>();
 
   const isNew = id === undefined;
-  const blog = useAppSelector((state) => state.blog.entity);
-  const loading = useAppSelector((state) => state.blog.loading);
-  const errorMessage = useAppSelector((state) => state.blog.errorMessage);
-  const updateSuccess = useAppSelector((state) => state.blog.updateSuccess);
+  const blog = useAppSelector((state) => state.adminBlog.entity);
+  const loading = useAppSelector((state) => state.adminBlog.loading);
+  const errorMessage = useAppSelector((state) => state.adminBlog.errorMessage);
+  const updateSuccess = useAppSelector((state) => state.adminBlog.updateSuccess);
 
   const [title, setTitle] = useState(blog.title || "");
   const [shortDescription, setShortDescription] = useState(
@@ -51,8 +51,8 @@ const AddPost = () => {
   const [tags, setTags] = useState(blog.tags || "");
   const [url, setUrl] = useState(blog.url || "");
 
-  const categorList = useAppSelector((state) => state.category.entities);
-  const tagsList = useAppSelector((state) => state.tag.entities);
+  const categorList = useAppSelector((state) => state.adminCategory.entities);
+  const tagsList = useAppSelector((state) => state.adminTag.entities);
 
   const dispatch = useAppDispatch();
   const router = useRouter();

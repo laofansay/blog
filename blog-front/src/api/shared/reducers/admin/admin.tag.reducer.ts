@@ -4,6 +4,7 @@ import { loadMoreDataWhenScrolled, parseHeaderForLinks } from 'react-jhipster';
 import { cleanEntity } from '@/api/shared/util/entity-utils';
 import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from '@/api/shared/reducers/reducer.utils';
 import { ITag, defaultValue } from '@/api/model/tag.model';
+import { ApiResponse, PageResponse } from '../../types/api-response.types';
 
 const initialState: EntityState<ITag> = {
   loading: false,
@@ -17,13 +18,21 @@ const initialState: EntityState<ITag> = {
   gradeList: [],
 };
 
-const apiUrl = 'api/tags';
+const apiUrl = 'admin/blog/tags';
+
 
 // Actions
 
 export const getEntities = createAsyncThunk('tag/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
   const requestUrl = `${apiUrl}?${sort ? `page=${page}&size=${size}&sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<ITag[]>(requestUrl);
+  return axios.get<PageResponse<ITag[]>>(requestUrl);
+});
+
+export const getList = createAsyncThunk('tag/fetch_entity_list', async ({ }) => {
+  const requestUrl = `${apiUrl}/list?cacheBuster=${new Date().getTime()}`;
+  
+  const requestBody = { };
+  return axios.post<ApiResponse<ITag[]>>(requestUrl,requestBody);
 });
 
 export const getEntity = createAsyncThunk(
@@ -93,7 +102,18 @@ export const TagSlice = createEntitySlice({
           loading: false,
           links,
           entities: loadMoreDataWhenScrolled(state.entities, data, links),
-          totalItems: parseInt(headers['x-total-count'], 10),
+          totalItems: data.data.pagination.total,
+        };
+      })
+      .addMatcher(isFulfilled(getList), (state, action) => {
+        const { data, headers } = action.payload;
+        const links = parseHeaderForLinks(headers.link);
+        return {
+          ...state,
+          loading: false,
+          links,
+          entities:  data.data,
+          totalItems: 0,
         };
       })
       .addMatcher(isFulfilled(createEntity, updateEntity, partialUpdateEntity), (state, action) => {
@@ -102,7 +122,7 @@ export const TagSlice = createEntitySlice({
         state.updateSuccess = true;
         state.entity = action.payload.data;
       })
-      .addMatcher(isPending(getEntities, getEntity), state => {
+      .addMatcher(isPending(getEntities, getEntity,getList), state => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;
