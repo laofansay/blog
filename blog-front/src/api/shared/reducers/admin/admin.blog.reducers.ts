@@ -31,7 +31,7 @@ const apiUrl = '/admin/blog/post';
 
 // 分页列表查询
 export const getEntities = createAsyncThunk(
-	'post/fetch_entity_list',
+	'post/fetch_entity_page',
 	async ({ query, page, size, sort }: IQueryParams) => {
 		const requestUrl = `${apiUrl}/page?cacheBuster=${new Date().getTime()}`
 		const requestBody = {
@@ -66,7 +66,7 @@ export const createEntity = createAsyncThunk(
 export const updateEntity = createAsyncThunk(
 	'post/update_entity',
 	async (entity: IBlog) => {
-		return axios.put<IBlog>(`${apiUrl}/update`, cleanEntity(entity))
+		return axios.post<IBlog>(`${apiUrl}/update`, cleanEntity(entity))
 	},
 	{ serializeError: serializeAxiosError }
 )
@@ -75,7 +75,7 @@ export const updateEntity = createAsyncThunk(
 export const partialUpdateEntity = createAsyncThunk(
 	'post/partial_update_entity',
 	async (entity: IBlog) => {
-		return axios.patch<IBlog>(`${apiUrl}/update`, cleanEntity(entity))
+		return axios.post<IBlog>(`${apiUrl}/update`, cleanEntity(entity))
 	},
 	{ serializeError: serializeAxiosError }
 )
@@ -84,8 +84,8 @@ export const partialUpdateEntity = createAsyncThunk(
 export const deleteEntity = createAsyncThunk(
 	'post/delete_entity',
 	async (id: string | number) => {
-		const requestUrl = `${apiUrl}/${id}`
-		return axios.delete<IBlog>(requestUrl)
+		const requestUrl = `${apiUrl}/delete?ids=${id}`
+		return axios.post<IBlog>(requestUrl)
 	},
 	{ serializeError: serializeAxiosError }
 )

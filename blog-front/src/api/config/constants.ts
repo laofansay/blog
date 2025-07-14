@@ -25,6 +25,6 @@ export const APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT = '0,0.[00]';
 
 
 export const formatCreatedTime = (time: dayjs.Dayjs | null | undefined): string => {
-  //return dayjs.isDayjs(time) ? time.format(APP_DATE_FORMAT) : '';
-  return '--'
+  if (!time) return '--';
+  return dayjs.isDayjs(time) ? time.format(APP_DATE_FORMAT) : '--';
 };

@@ -2,13 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { getList, reset } from '@/api/shared/reducers/app/app.category.reducer';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { ITEMS_PER_PAGE } from '@/api/shared/util/pagination.constants';
 import Link from 'next/link';
 
 const ProfileCategory = () => {
     const dispatch = useAppDispatch();
-    const [page, setPage] = useState(1);
-    const rowsPerPage = ITEMS_PER_PAGE;
 
     // 获取分类数据状态
     const categoryState = useAppSelector(state => state.category);
@@ -23,11 +20,10 @@ const ProfileCategory = () => {
         return () => {
             dispatch(reset());
         };
-    }, [page, dispatch, rowsPerPage]);
+    }, [dispatch]);
 
     // 打印resuelt的值和整个状态
     console.log('Category数据:', resuelt);
-    console.log('Category状态:', categoryState);
 
     return (
         <div className="mt-2 px-8 py-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">

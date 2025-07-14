@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { ICategory } from "@/api/model/category.model";
 import {
@@ -8,7 +8,7 @@ import {
   createEntity,
   deleteEntity,
   reset,
-} from "@/api/shared/reducers/category.reducer";
+} from "@/api/shared/reducers/admin/admin.category.reducer";
 import {
   Table,
   TableHeader,
@@ -37,13 +37,13 @@ import { ITEMS_PER_PAGE } from "@/api/shared/util/pagination.constants";
 const Category = () => {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
-  const rowsPerPage = 10;
+  const rowsPerPage = ITEMS_PER_PAGE;
 
-  const categories = useAppSelector((state) => state.category.entities);
-  const totalItems = useAppSelector((state) => state.category.totalItems);
-  const isLoading = useAppSelector((state) => state.category.loading);
-  const updateSuccess = useAppSelector((state) => state.category.updateSuccess);
-  const errorMessage = useAppSelector((state) => state.category.errorMessage);
+  const categories = useAppSelector((state) => state.adminCategory.entities );
+  const totalItems = useAppSelector((state) => state.adminCategory.totalItems);
+  const isLoading = useAppSelector((state) => state.adminCategory.loading);
+  const updateSuccess = useAppSelector((state) => state.adminCategory.updateSuccess);
+  const errorMessage = useAppSelector((state) => state.adminCategory.errorMessage);
 
   const [currItem, setCurrItem] = useState<ICategory | null>(null);
   const [name, setName] = useState("");
@@ -53,24 +53,20 @@ const Category = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const refreshTable = useCallback(() => {
-    dispatch(getEntities({ page: page - 1, size: rowsPerPage, sort: "id" }));
-  }, [page, dispatch]);
 
   useEffect(() => {
-    refreshTable();
-  }, [page, refreshTable]);
+    dispatch(getEntities({ page: page, size: rowsPerPage, sort: "id" }));
+  }, [page,dispatch,rowsPerPage]);
 
   useEffect(() => {
     if (updateSuccess) {
       toast.success("操作成功");
-      refreshTable();
       onClose();
       dispatch(reset());
     } else if (errorMessage) {
       toast.error(errorMessage);
     }
-  }, [updateSuccess, errorMessage, dispatch, onClose, refreshTable]);
+  }, [updateSuccess, errorMessage, dispatch, onClose]);
 
   const confirmOpenDialog = useCallback(
     (item: ICategory | null) => {
@@ -104,7 +100,7 @@ const Category = () => {
 
     const rankNum = Number(rank);
     if (isNaN(rankNum) || rankNum < 0) {
-      setRankError("排序必须是非负数");
+      setRankError("排序为自然数");
       isValid = false;
     } else {
       setRankError("");
@@ -133,38 +129,40 @@ const Category = () => {
 
   const deleteCategory = () => {
     if (currItem) {
-      dispatch(deleteEntity(currItem.id ?? 0 ));
+      dispatch(deleteEntity(currItem.id ?? 0));
       setDeleteModalOpen(false);
     }
   };
+
   const handleRefresh = () => {
-    dispatch(getEntities({ page: page - 1, size: ITEMS_PER_PAGE, sort: "id" }));
+    dispatch(getEntities({ page: page, size: rowsPerPage, sort: "id" }));
     toast.success("刷新成功");
   };
+
   const ActionButtons = React.memo(({ item }: { item: ICategory }) => {
-  return (
-    <div className="flex items-center gap-2 justify-center">
-      <Tooltip content="修改分类" closeDelay={0}>
-        <span
-          className="cursor-pointer text-primary hover:scale-110 transition-transform duration-150"
-          onClick={() => confirmOpenDialog(item)}
-          onMouseLeave={(e) => e.currentTarget.blur()}
-        >
-          <RiEditLine size={18} />
-        </span>
-      </Tooltip>
-      <Tooltip color="danger" content="删除分类" closeDelay={0}>
-        <span
-          className="cursor-pointer text-danger hover:scale-110 transition-transform duration-150"
-          onClick={() => confirmDelete(item)}
-          onMouseLeave={(e) => e.currentTarget.blur()}
-        >
-          <MdDelete size={18} />
-        </span>
-      </Tooltip>
-    </div>
-  );
-});
+    return (
+      <div className="flex items-center gap-2 justify-center">
+        <Tooltip content="修改分类" closeDelay={0}>
+          <span
+            className="cursor-pointer text-primary hover:scale-110 transition-transform duration-150"
+            onClick={() => confirmOpenDialog(item)}
+            onMouseLeave={(e) => e.currentTarget.blur()}
+          >
+            <RiEditLine size={18} />
+          </span>
+        </Tooltip>
+        <Tooltip color="danger" content="删除分类" closeDelay={0}>
+          <span
+            className="cursor-pointer text-danger hover:scale-110 transition-transform duration-150"
+            onClick={() => confirmDelete(item)}
+            onMouseLeave={(e) => e.currentTarget.blur()}
+          >
+            <MdDelete size={18} />
+          </span>
+        </Tooltip>
+      </div>
+    );
+  });
 
 ActionButtons.displayName = 'ActionButtons';
 

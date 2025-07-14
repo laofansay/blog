@@ -20,7 +20,7 @@ const store = configureStore({
     category: appCategoryReducer,
     tag: appTagReducer,
     adminBlog: adminBlogReducer,
-    AdminCategory: adminCategoryReducer,
+    adminCategory: adminCategoryReducer,
     adminTag: adminTagReducer,
 
     counter: counterSlice,

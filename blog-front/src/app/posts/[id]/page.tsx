@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 import ProfileCard from "@/components/ProfileCard";
-import { getEntity } from "@/api/shared/reducers/blog.reducers";
+import { getEntity } from "@/api/shared/reducers/app/app.blog.reducers";
 import React, { useEffect, useRef, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/store/store";

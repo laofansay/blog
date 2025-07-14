@@ -7,7 +7,7 @@ export interface IBlog {
   title?: string;
   subTitle?: string;
   summary?: string;
-  tags?: string[] | null;
+  tags?: string[] | [];
   url?: string | null;
   coverImage?: string;
   coverAlt?: string | null;

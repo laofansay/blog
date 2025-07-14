@@ -32,8 +32,8 @@ import {
   updateEntity,
   reset,
 } from "@/api/shared/reducers/admin/admin.blog.reducers";
-import { getEntities as getCategories } from "@/api/shared/reducers/admin/admin.category.reducer";
-import { getEntities as getTags } from "@/api/shared/reducers/admin/admin.tag.reducer";
+import { getList as getCategories } from "@/api/shared/reducers/admin/admin.category.reducer";
+import { getList as getTags } from "@/api/shared/reducers/admin/admin.tag.reducer";
 
 const UpdatePost = ({ params }) => {
   const { id } = params;
@@ -48,10 +48,8 @@ const UpdatePost = ({ params }) => {
   const categorList = useAppSelector((state) => state.adminCategory.entities);
   const tagsList = useAppSelector((state) => state.adminTag.entities);
 
-  const [title, setTitle] = useState(blog.title);
-  const [shortDescription, setShortDescription] = useState(
-    blog.shortDescription || ""
-  );
+  const [title, setTitle] = useState(blog?.title);
+  const [shortDescription, setShortDescription] = useState( blog.shortDescription);
   const [seoTitle, setSeoTitle] = useState(blog.seoTitle || "");
   const [imageUrl, setImageUrl] = useState(blog.imageUrl || "");
   const [imageAlt, setImageAlt] = useState(blog.imageAlt || "");
@@ -87,7 +85,7 @@ const UpdatePost = ({ params }) => {
       setTopic(blog.topic || "");
       setUrl(blog.url || "");
       if (blog && blog.tags) {
-        const tagsArray = blog.tags.split(",").map((tag) => tag.trim());
+        const tagsArray = blog.tags.map((tag) => tag.trim());
         // Filter tagsArray to include only those tags present in tagsList
         const validTags = tagsArray.filter(
           (tag) => tagsList.some((listTag) => listTag.name === tag) // Assuming tagsList has `name` property for tag names

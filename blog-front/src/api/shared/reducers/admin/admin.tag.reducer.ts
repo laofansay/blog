@@ -18,14 +18,21 @@ const initialState: EntityState<ITag> = {
   gradeList: [],
 };
 
-const apiUrl = 'admin/blog/tags';
+const apiUrl = 'admin/blog/tag';
 
 
 // Actions
 
-export const getEntities = createAsyncThunk('tag/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?${sort ? `page=${page}&size=${size}&sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
-  return axios.get<PageResponse<ITag[]>>(requestUrl);
+export const getEntities = createAsyncThunk('tag/fetch_entity_page', 
+  async ({ query, page, size, sort }: IQueryParams) => {
+    const requestUrl = `${apiUrl}/page?cacheBuster=${new Date().getTime()}`
+    const requestBody = {
+      query,
+      page,
+      size
+    }
+    return axios.post<PageResponse<ITag>>(requestUrl, requestBody)
+
 });
 
 export const getList = createAsyncThunk('tag/fetch_entity_list', async ({ }) => {
@@ -38,7 +45,7 @@ export const getList = createAsyncThunk('tag/fetch_entity_list', async ({ }) => 
 export const getEntity = createAsyncThunk(
   'tag/fetch_entity',
   async (id: string | number) => {
-    const requestUrl = `${apiUrl}/${id}`;
+    const requestUrl = `${apiUrl}/info?id=${id}`;
     return axios.get<ITag>(requestUrl);
   },
   { serializeError: serializeAxiosError },
@@ -47,7 +54,7 @@ export const getEntity = createAsyncThunk(
 export const createEntity = createAsyncThunk(
   'tag/create_entity',
   async (entity: ITag, thunkAPI) => {
-    return axios.post<ITag>(apiUrl, cleanEntity(entity));
+    return axios.post<ITag>(`${apiUrl}/add`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
@@ -55,7 +62,7 @@ export const createEntity = createAsyncThunk(
 export const updateEntity = createAsyncThunk(
   'tag/update_entity',
   async (entity: ITag, thunkAPI) => {
-    return axios.put<ITag>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
+    return axios.post<ITag>(`${apiUrl}/update`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
@@ -63,7 +70,7 @@ export const updateEntity = createAsyncThunk(
 export const partialUpdateEntity = createAsyncThunk(
   'tag/partial_update_entity',
   async (entity: ITag, thunkAPI) => {
-    return axios.patch<ITag>(`${apiUrl}/${entity.id}`, cleanEntity(entity));
+    return axios.post<ITag>(`${apiUrl}/update`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
@@ -71,8 +78,8 @@ export const partialUpdateEntity = createAsyncThunk(
 export const deleteEntity = createAsyncThunk(
   'tag/delete_entity',
   async (id: string | number, thunkAPI) => {
-    const requestUrl = `${apiUrl}/${id}`;
-    return await axios.delete<ITag>(requestUrl);
+    const requestUrl = `${apiUrl}/delete?ids=${id}`;
+    return await axios.post<ITag>(requestUrl);
   },
   { serializeError: serializeAxiosError },
 );
@@ -95,19 +102,19 @@ export const TagSlice = createEntitySlice({
       })
       .addMatcher(isFulfilled(getEntities), (state, action) => {
         const { data, headers } = action.payload;
-        const links = parseHeaderForLinks(headers.link);
+        const links = '';
 
         return {
           ...state,
           loading: false,
           links,
-          entities: loadMoreDataWhenScrolled(state.entities, data, links),
+          entities: loadMoreDataWhenScrolled(state.entities, data.data.list, links),
           totalItems: data.data.pagination.total,
         };
       })
       .addMatcher(isFulfilled(getList), (state, action) => {
         const { data, headers } = action.payload;
-        const links = parseHeaderForLinks(headers.link);
+        const links = "";
         return {
           ...state,
           loading: false,

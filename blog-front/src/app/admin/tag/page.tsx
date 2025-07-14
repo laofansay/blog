@@ -6,7 +6,7 @@ import {
   createEntity,
   deleteEntity,
   reset,
-} from "@/api/shared/reducers/tag.reducer";
+} from "@/api/shared/reducers/admin/admin.tag.reducer";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { ITag } from "@/api/model/tag.model";
 import {
@@ -45,12 +45,12 @@ const Tag = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   // Redux 数据
-  const tagsLists = useAppSelector((state) => state.tag.entities);
-  const totalItems = useAppSelector((state) => state.tag.totalItems);
-  const isLoading = useAppSelector((state) => state.tag.loading);
-  const errorMessage = useAppSelector((state) => state.tag.errorMessage);
-  const updateSuccess = useAppSelector((state) => state.tag.updateSuccess);
-  const updating = useAppSelector((state) => state.tag.updating);
+  const tagsLists = useAppSelector((state) => state.adminTag.entities);
+  const totalItems = useAppSelector((state) => state.adminTag.totalItems);
+  const isLoading = useAppSelector((state) => state.adminTag.loading);
+  const errorMessage = useAppSelector((state) => state.adminTag.errorMessage);
+  const updateSuccess = useAppSelector((state) => state.adminTag.updateSuccess);
+  const updating = useAppSelector((state) => state.adminTag.updating);
 
   // 控制模态框
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -62,12 +62,12 @@ const Tag = () => {
   );
 
   const handleRefresh = () => {
-    dispatch(getEntities({ page: page - 1, size: ITEMS_PER_PAGE, sort: "id" }));
+    dispatch(getEntities({ page: 1 , size: ITEMS_PER_PAGE, sort: "id" }));
     toast.success("刷新成功");
   };
   // 重新获取数据
   const refreshTable = useCallback(() => {
-    dispatch(getEntities({ page: page - 1, size: ITEMS_PER_PAGE, sort: "id" }));
+    dispatch(getEntities({ page: 1 , size: ITEMS_PER_PAGE, sort: "id" }));
   }, [dispatch, page]);
 
   useEffect(() => {

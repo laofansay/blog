@@ -18,11 +18,11 @@ const initialState: EntityState<ICategory> = {
   gradeList: [],
 };
 
-const apiUrl = 'admin/blog/categor';
+const apiUrl = 'admin/blog/category';
 
 // Actions
 
-export const getEntities = createAsyncThunk('category/fetch_entity_list', 
+export const getEntities = createAsyncThunk('category/fetch_entity_page', 
   async ({ query, page, size, sort }: IQueryParams) => {
   const requestUrl = `${apiUrl}/page?cacheBuster=${new Date().getTime()}`
   const requestBody = {
@@ -45,7 +45,7 @@ export const getList = createAsyncThunk('category/fetch_entity_list',
 export const getEntity = createAsyncThunk(
   'category/fetch_entity',
   async (id: string | number) => {
-    const requestUrl = `${apiUrl}/${id}`;
+    const requestUrl = `${apiUrl}/info?id=${id}`;
     return axios.get<ICategory>(requestUrl);
   },
   { serializeError: serializeAxiosError },
@@ -54,7 +54,7 @@ export const getEntity = createAsyncThunk(
 export const createEntity = createAsyncThunk(
   'category/create_entity',
   async (entity: ICategory, thunkAPI) => {
-    return axios.post<ICategory>(apiUrl, cleanEntity(entity));
+    return axios.post<ICategory>(`${apiUrl}/add`, cleanEntity(entity));
   },
   { serializeError: serializeAxiosError },
 );
@@ -78,7 +78,7 @@ export const partialUpdateEntity = createAsyncThunk(
 export const deleteEntity = createAsyncThunk(
   'category/delete_entity',
   async (id: string | number, thunkAPI) => {
-    const requestUrl = `${apiUrl}/${id}`;
+    const requestUrl = `${apiUrl}/delete?ids=${id}`;
     return await axios.delete<ICategory>(requestUrl);
   },
   { serializeError: serializeAxiosError },
@@ -102,13 +102,13 @@ export const CategorySlice = createEntitySlice({
       })
       .addMatcher(isFulfilled(getEntities), (state, action) => {
         const { data, headers } = action.payload;
-        const links = parseHeaderForLinks(headers.link);
+        const links ="";
 
         return {
           ...state,
           loading: false,
           links,
-          entities: loadMoreDataWhenScrolled(state.entities, data, links),
+          entities: loadMoreDataWhenScrolled(state.entities, data.data.list, links),
           totalItems: data.data.pagination.total,
         };
       })

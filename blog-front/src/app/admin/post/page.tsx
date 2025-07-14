@@ -105,14 +105,17 @@ const PostListPage = () => {
     toast.success("刷新成功");
   };
   const handleAddBlog = () => {
+    console.log(id);
     return router.push("/admin/post/add");
   };
 
   const handleEditBlog = (id) => {
+    console.log(id);
     return router.push(`/admin/post/${id}`);
   };
 
   const handleView = (id) => {
+    console.log(id);
     router.push(`/posts/${id}`);
   };
 
@@ -404,7 +407,7 @@ const PostListPage = () => {
         </TableHeader>
         <TableBody items={blogList} loadingState={isLoading}>
           {(item) => (
-            <TableRow key={item}>
+            <TableRow key={item.id}>
               {(columnKey) => (
                 <TableCell>{renderCell(item, columnKey)}</TableCell>
               )}
