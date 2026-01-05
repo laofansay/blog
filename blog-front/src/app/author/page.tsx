@@ -22,6 +22,11 @@ import { FiPhone } from "react-icons/fi";
 import { GoDeviceCameraVideo } from "react-icons/go";
 import { FaTiktok } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { SiYoutube } from "react-icons/si";
+import { FaBookOpen } from "react-icons/fa"; // 近似
+import { MdOutlineNotes } from "react-icons/md";
+
 import "./print.css";
 const Author = () => {
   const handlePrint = () => {
@@ -161,14 +166,26 @@ const Author = () => {
 
                 <div className="flex justify-between gap-1">
                   <div className="flex items-center gap-1">
-                    <FaBookmark size={16} />
+                    <FaBookOpen size={16} color="#FF0000" />
                     <span className="text-gray-600 text-sm">小红书:</span>
                   </div>
                   <a
                     className="text-sm text-blue-400 hover:underline visited:text-purple-600"
                     href="https://www.xiaohongshu.com/user/profile/5e93d9e5000000000100ac37"
                   >
-                    小红书
+                    添箱诗话
+                  </a>
+                </div>
+                <div className="flex justify-between gap-1">
+                  <div className="flex items-center gap-1">
+                    <SiYoutube size={16} color="#FF0000" />
+                    <span className="text-gray-600 text-sm">油管:</span>
+                  </div>
+                  <a
+                    className="text-sm text-blue-400 hover:underline visited:text-purple-600"
+                    href="https://www.youtube.com/@Scarboroug"
+                  >
+                    斯卡布罗
                   </a>
                 </div>
               </div>
