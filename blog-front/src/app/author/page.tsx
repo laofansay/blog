@@ -1,16 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Avatar,
-  Card,
-  CardBody,
-  Image,
-  Badge,
-  ScrollShadow,
-  CardFooter,
-  Accordion,
-  AccordionItem,
-} from "@nextui-org/react";
+
 import { FaGithub } from "react-icons/fa";
 import { MdOutlineRoom } from "react-icons/md";
 import { FaBold } from "react-icons/fa";
@@ -18,14 +8,9 @@ import ProjectExp from "@/components/ProjectExp";
 import CompanyExp from "@/components/CompanyExp";
 import data from "./data.json";
 import Plan from "@/components/Plan";
-import { FiPhone } from "react-icons/fi";
-import { GoDeviceCameraVideo } from "react-icons/go";
 import { FaTiktok } from "react-icons/fa";
-import { FaBookmark } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
 import { SiYoutube } from "react-icons/si";
 import { FaBookOpen } from "react-icons/fa"; // 近似
-import { MdOutlineNotes } from "react-icons/md";
 
 import "./print.css";
 const Author = () => {

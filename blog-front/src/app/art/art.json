@@ -1,11 +1,163 @@
 {
-    "arts":[
-        {"name":"洞天福地项目","img":"img/art1.jpg","url":"art1 description" ,"type":"e-commerce"},
-        {"name":"UI中国","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
-        {"name":"拖拉机80","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
-        {"name":"FarmmerTo-C","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
-        {"name":"FarmmerTo-F","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"},
-        {"name":"盘古溯源","img":"img/art1.jpg","url":"art1 description","type":"e-commerce"}
-
+    "arts": [
+        {
+            "id": 1000,
+            "name": "香草集市H5",
+            "context": "这个网站是一个使用 Bolt + Expo + Nativewind 技术栈构建的 React Native Web 单页应用（SPA），部署在 Netlify 上。主题围绕“香草集市”（斯卡布罗音乐元素），是一个互动游戏/社区平台，结合了养成、交易、冒险和社交功能。",
+            "img": [
+                "art/1001.png",
+                "art/1002.png",
+                "art/1003.png",
+                "art/1004.png",
+                "art/1005.jpg",
+                "art/1006.jpg",
+                "art/1007.jpg",
+                "art/1008.jpg",
+                "art/1009.jpg",
+                "art/1010.jpg",
+                "art/1011.jpg",
+                "art/1012.jpg",
+                "art/1013.jpg",
+                "art/1014.jpg"
+            ],
+            "url": "https://scarbro.laofansay.uk/",
+            "type": "电商平台"
+        },
+        {
+            "id": 1100,
+            "name": "香草集市APP",
+            "context": "管理和展示自媒体相关的素材内容",
+            "img": [
+                "art/1101.jpg",
+                "art/1102.jpg",
+                "art/1103.jpg",
+                "art/1104.jpg",
+                "art/1105.jpg",
+                "art/1106.jpg",
+                "art/1107.jpg",
+                "art/1108.jpg",
+                "art/1109.jpg",
+                "art/1110.png",
+                "art/1111.png",
+                "art/1112.jpg",
+                "art/1113.jpg"
+            ],
+            "url": "art1 description",
+            "type": "商业APP"
+        },
+        {
+            "id": 1200,
+            "name": "布卡布罗自媒体素材网",
+            "context": "管理和展示自媒体相关的素材内容",
+            "img": [
+                "img/art1.jpg"
+            ],
+            "url": "art1 description",
+            "type": "博客"
+        },
+        {
+            "id": 1300,
+            "name": "新闻订阅",
+            "context": "通过Cloudflare免费部署优雅地阅读实时热门新闻，只看自己喜欢的，免费去烦人的推送，广告，信息茧房",
+            "img": [
+                "art/1301.png",
+                "art/1302.png",
+                "art/1303.png",
+                "art/1304.png"
+            ],
+            "url": "https://newslaofan.vercel.app/",
+            "type": "网站"
+        },
+        {
+            "id": 1400,
+            "name": "在线看课demo",
+            "img": [
+                "art/1401.png",
+                "art/1402.png",
+                "art/1403.png",
+                "art/1404.png",
+                "art/1405.png",
+                "img/1406.png"
+            ],
+            "url": "https://iq2front.vercel.app/",
+            "type": "小应用",
+            "content": "面试作业题"
+        },
+        {
+            "id": 1500,
+            "name": "智慧校园服务平台",
+            "context": "智慧校园一站式服务平台,推动教育数字化与校园管理现代化，一站式服务平台整合教务、行政、生活服务，打破数据孤岛，提升校园效率与用户满意度。探索功能模块",
+            "img": [
+                "art/1501.png"
+            ],
+            "url": "https://2025-proj-02.vercel.app/",
+            "type": "毕业设计"
+        },
+        {
+            "id": 1600,
+            "name": "个人品片牌网站学习展示",
+            "context": "",
+            "img": [
+                "art/1601.png"
+            ],
+            "url": "https://202501.vercel.app/",
+            "type": "毕业设计"
+        },
+        {
+            "id": 1700,
+            "name": "绿茶官网",
+            "context": "洞天福地有限公司是一家专注于通过区块链技术推动茶叶产业现代化的科技公司。助力农村产业升级和绿色发展。",
+            "img": [
+                "art/1701.png"
+            ],
+            "url": "https://fairlyland.laofansay.uk/",
+            "type": "网站"
+        },
+        {
+            "id": 1800,
+            "name": "幸运锅屋",
+            "context": "一个基于 Supabase 的中世纪风格数字预言游戏，玩家从1-10中选择9个数字进行投注，每5分钟开奖一次。如果无数据，可能是数据库过期",
+            "img": [
+                "/art/1901.png",
+                "/art/1902.png",
+                "/art/1903.png",
+                "/art/1904.png",
+                "/art/1905.png",
+                "/art/1906.png",
+                "/art/1907.png"
+            ],
+            "url": "https://pool2025.netlify.app/",
+            "type": "游戏"
+        },
+        {
+            "id": 1900,
+            "name": "PK5",
+            "context": "H5棋牌游戏",
+            "img": [
+                "art/1901.png",
+                "art/1902.png",
+                "art/1903.png",
+                "art/1904.png",
+                "art/1905.png",
+                "art/1906.png",
+                "art/1907.png"
+            ],
+            "url": "https://fairlyland.laofansay.uk/",
+            "type": "网站"
+        },
+        {
+            "id": 1900,
+            "name": "墨宝App",
+            "context": "商城",
+            "img": [
+                "art/2001.png",
+                "art/2002.png",
+                "art/2003.png",
+                "art/2004.png",
+                "art/2005.png"
+            ],
+            "url": "",
+            "type": "商业APP"
+        }
     ]
 }
